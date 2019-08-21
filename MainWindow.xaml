@@ -5,8 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Cat Control Application" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Date:" Grid.Column="1" HorizontalAlignment="Left" Margin="700,-1,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="todayDate" HorizontalAlignment="Left" Height="23" Margin="700,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" IsReadOnly="True" Grid.Column="1" />
+   
+        <Button x:Name="newCat" Content="Add new Cat" HorizontalAlignment="Left" Margin="14,50,0,0" VerticalAlignment="Top" Width="75" Click="NewCat_Click" Grid.Column="1"/>
+        <TextBox x:Name="newCatName" HorizontalAlignment="Left" Height="23" Margin="14,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+        <Label Content="New cat name:" Grid.Column="1" HorizontalAlignment="Left" Margin="14,-1,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="newCatRace" HorizontalAlignment="Left" Height="23" Margin="164,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label Content="New cat race:" Grid.Column="1" HorizontalAlignment="Left" Margin="164,-1,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="newCatMass" HorizontalAlignment="Left" Height="23" Margin="314,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label Content="New cat mass(kg):" Grid.Column="1" HorizontalAlignment="Left" Margin="314,-1,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="food" HorizontalAlignment="Left" Height="23" Margin="454,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+        <Label Content="New cat diet:" Grid.Column="1" HorizontalAlignment="Left" Margin="454,-1,0,0" VerticalAlignment="Top"/>
+
+        <Label Content="Your cats:" Grid.Column="1" HorizontalAlignment="Left" Margin="24,140,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="catsList" HorizontalAlignment="Left" Height="100" Margin="24,160,0,0" VerticalAlignment="Top" Width="100" Grid.Column="1"/>
+        <Button x:Name="removeCat" Content="Remove Cat" HorizontalAlignment="Left" Margin="24.256,280,0,0" VerticalAlignment="Top" Width="75" Click="RemoveCat_Click" Grid.Column="1"/>
+
+        <Button x:Name="showCat" Content="Show Cat" HorizontalAlignment="Left" Margin="144,160,0,0" VerticalAlignment="Top" Width="75" Click="ShowCat_Click" Grid.Column="1"/>
+        <TextBox x:Name="catName" HorizontalAlignment="Left" Height="23" Margin="254,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Grid.Column="1" />
+        <TextBox x:Name="catMass" HorizontalAlignment="Left" Height="23" Margin="404,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Grid.Column="1" />
+        <TextBox x:Name="dailyFoodNeed" HorizontalAlignment="Left" Height="23" Margin="404,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Grid.Column="1" />
+        <Label Content="Daily food need:" Grid.Column="1" HorizontalAlignment="Left" Margin="304,200,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="lastMed" HorizontalAlignment="Left" Height="23" Margin="254,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="" Grid.Column="1"/>
+        <TextBox x:Name="nextMed" HorizontalAlignment="Left" Height="23" Margin="404,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Grid.Column="1" Background="White" />
+        <Button x:Name="saveCat" Content="Save changes" HorizontalAlignment="Left" Margin="449,277,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Click="SaveCat_Click"/>
     </Grid>
 </Window>
