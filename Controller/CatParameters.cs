@@ -57,5 +57,16 @@ namespace CatApp.ViewModel
                 return _lastVetVisit.ToShortDateString();
             }
         }
+        public string imageSource
+        {
+            get
+            {
+                return _imageSource;
+            }
+            set
+            {
+                _imageSource = value;
+            }
+        }
     }
 }

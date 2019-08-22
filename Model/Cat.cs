@@ -13,6 +13,7 @@ namespace CatApp.Model
         protected string _name { get; set; }
         protected string _food { get; set; }
         protected DateTime _lastVetVisit { get; set; }
+        protected string _imageSource { get; set; }
 
         public Cat(string Name,string Race, int Mass,string Food)
         {

@@ -1,5 +1,6 @@
 ﻿using CatApp.Model;
 using CatApp.ViewModel;
+using CatApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace CatApp
         List<CatParameters> _catsList = new List<CatParameters>();
         DateTime todayDateTime = DateTime.Now;
         string cat = string.Empty;
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -56,7 +57,10 @@ namespace CatApp
         {
             if (catsList.SelectedItem != null)
             {
+                string name = catsList.SelectedItem.ToString();
+
                 catsList.Items.Remove(catsList.SelectedItem);
+                _catsList.Remove(_catsList.Find(cat => cat.catName == name));
             }
             else
             {
@@ -68,64 +72,9 @@ namespace CatApp
         {
             cat = Convert.ToString(catsList.SelectedItem);
             CatParameters selectedCat = _catsList.Find(selCat => selCat.catName == cat);
-            if (selectedCat == null)
-            {
-                MessageBox.Show("Choose a cat!","ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else
-            {
-                catName.Text = selectedCat.catName;
-                catMass.Text = Convert.ToString(selectedCat.catMass) +" kg";
-                if(selectedCat.catFood.Equals("barf",StringComparison.OrdinalIgnoreCase))
-                {
-                    dailyFoodNeed.Text = "300 g";
-                }
-                else if (selectedCat.catFood.Equals("dry", StringComparison.OrdinalIgnoreCase))
-                {
-                    double foodNeed = 0.27 * 70 * selectedCat.catMass;
-                    dailyFoodNeed.Text = Convert.ToString(foodNeed) + " g";
-                }
-                else if (selectedCat.catFood.Equals("can", StringComparison.OrdinalIgnoreCase))
-                {
-                    double foodNeed = 100 * selectedCat.catMass;
-                    dailyFoodNeed.Text = Convert.ToString(foodNeed) + " g";
-                }
-                lastMed.Text = selectedCat.lastVetVisit;
-                if(lastMed.Text == "01.01.0001")
-                {
-                    lastMed.Text = "go to Vet!";
-                }
-                if (lastMed.Text != string.Empty)
-                {
-                    try
-                    {
-                        DateTime nextVetVisit = DateTime.Parse(lastMed.Text);
-                        nextVetVisit = nextVetVisit.AddDays(30);
-                        nextMed.Text = nextVetVisit.ToShortDateString();
-                        double days = nextVetVisit.Subtract(todayDateTime).TotalDays;
-                        if (days <= 7)
-                        {
-                            nextMed.Foreground = new SolidColorBrush(Colors.Red);
-                        }
-                    }
-                    catch(FormatException)
-                    {
-                        nextMed.Text = "go to Vet!NOW!";
-                    }
-                }
-                else
-                {
-                    nextMed.Text = "brak daty badania!";
-                }
-            }
-
-        }
-
-        private void SaveCat_Click(object sender, RoutedEventArgs e)
-        {
-            cat = Convert.ToString(catsList.SelectedItem);
-            CatParameters selectedCat = _catsList.Find(selCat => selCat.catName == cat);
-            selectedCat.lastVetVisit = lastMed.Text;
+            var newWPF = new CatDetails(selectedCat);
+            newWPF.CatDetail();
+            newWPF.Show();
         }
     }
 }
