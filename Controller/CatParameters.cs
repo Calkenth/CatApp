@@ -4,12 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CatApp.ViewModel
 {
     public class CatParameters : Cat
     {
-        public CatParameters(string Name, string Race, int Mass, string Food) : base(Name, Race, Mass, Food)
+        public CatParameters(string Name, string Race, int Mass, string Food, bool isMale) : base(Name, Race, Mass, Food, isMale)
         {
             if (!(Food.Equals("dry", StringComparison.OrdinalIgnoreCase) || 
                 Food.Equals("barf", StringComparison.OrdinalIgnoreCase) || 
@@ -46,15 +47,38 @@ namespace CatApp.ViewModel
                 return _food;
             }
         }
+        public bool isMale { get
+            {
+                return _isMale;
+            }
+        }
         public string lastVetVisit
         {
             set
             {
-                _lastVetVisit = DateTime.Parse(value);
+                try
+                {
+                    _lastVetVisit = DateTime.Parse(value);
+                }
+                catch(FormatException)
+                {
+                    MessageBox.Show("Last Vet visit date was not filled.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
             get
             {
                 return _lastVetVisit.ToShortDateString();
+            }
+        }
+        public string vetFindings
+        {
+            get
+            {
+                return _vetFindings;
+            }
+            set
+            {
+                _vetFindings = value;
             }
         }
         public string imageSource
@@ -66,6 +90,24 @@ namespace CatApp.ViewModel
             set
             {
                 _imageSource = value;
+            }
+        }
+        public string birthDate
+        {
+            set
+            {
+                try
+                {
+                    _birthDate = DateTime.Parse(value);
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Birth date is not filled.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            get
+            {
+                return _birthDate.ToShortDateString();
             }
         }
     }

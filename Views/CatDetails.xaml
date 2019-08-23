@@ -5,18 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CatApp.Views"
         mc:Ignorable="d"
-        Title="CatDetails" Height="450" Width="800">
-    <Grid Focusable="True" >
-        <Image x:Name="catPicture" HorizontalAlignment="Left" Height="100" Margin="40,20,0,0" VerticalAlignment="Top" Width="100"/>
+        Title="CatDetails" Height="450" Width="800" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Image x:Name="catPicture" HorizontalAlignment="Left" Height="100" Margin="40,20,0,0" VerticalAlignment="Top" Width="100" Source="/Resources/anonymousCat.jpg"/>
         <Button x:Name="loadPic" Content="..." HorizontalAlignment="Left" Margin="40,130,0,0" VerticalAlignment="Top" Width="20" Click="LoadPic_Click"/>
+        <Button x:Name="pdf" Content="Vet findings" HorizontalAlignment="Left" Margin="40,160,0,0" VerticalAlignment="Top" Width="100" Click="Pdf_Click" />
 
         <TextBox x:Name="catName" HorizontalAlignment="Left" Height="23" Margin="160,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+        <Label x:Name="catSex" HorizontalAlignment="Left" Height="30" Margin="136,15,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="catMass" HorizontalAlignment="Left" Height="23" Margin="310,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+        <TextBox x:Name="catRace" HorizontalAlignment="Left" Height="23" Margin="460,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+        <TextBox x:Name="catBirthDate" HorizontalAlignment="Left" Height="23" Margin="610,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
         <TextBox x:Name="dailyFoodNeed" HorizontalAlignment="Left" Height="23" Margin="310,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
         <Label Content="Daily food need:" HorizontalAlignment="Left" Margin="205,60,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="catFood" HorizontalAlignment="Left" Height="23" Margin="460,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" />
+        <Label Content="of:" HorizontalAlignment="Left" Margin="430,60,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="lastMed" HorizontalAlignment="Left" Height="23" Margin="160,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text=""/>
         <TextBox x:Name="nextMed" HorizontalAlignment="Left" Height="23" Margin="310,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True" Background="White" />
-        <Button x:Name="saveCat" Content="Save changes" HorizontalAlignment="Left" Margin="140.41,380,0,0" VerticalAlignment="Top" Width="75" Click="SaveCat_Click" Grid.Column="1"/>
+        <Button x:Name="saveCatadnRestart" Content="Save" HorizontalAlignment="Left" Margin="40,380,0,0" VerticalAlignment="Top" Width="75" Click="SaveCat_Click"/>
+        <Button x:Name="saveCatandExit" Content="Save and close" HorizontalAlignment="Left" Margin="140,380,0,0" VerticalAlignment="Top" Width="100" Click="SaveCatandExit_Click" />
 
     </Grid>
 </Window>

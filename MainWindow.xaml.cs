@@ -26,12 +26,13 @@ namespace CatApp
         List<CatParameters> _catsList = new List<CatParameters>();
         DateTime todayDateTime = DateTime.Now;
         string cat = string.Empty;
+        bool catSex = false;
         
         public MainWindow()
         {
             InitializeComponent();
             todayDate.Text = todayDateTime.ToShortDateString();
-            _catsList.Add(new CatParameters("Fenrir", "Ragdoll", 5, "Barf"));
+            _catsList.Add(new CatParameters("Fenrir", "Ragdoll", 5, "Barf",true));
             foreach(var Cat in _catsList)
             {
                 catsList.Items.Add(Cat.catName);
@@ -42,7 +43,12 @@ namespace CatApp
         {
             try
             {
-                CatParameters newCat = new CatParameters(newCatName.Text, newCatRace.Text, Convert.ToInt32(newCatMass.Text), food.Text);
+                var res = MessageBox.Show("Is" + newCatName.Text +"male?", "One more thing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if(res == MessageBoxResult.Yes)
+                {
+                    catSex = true;
+                }
+                CatParameters newCat = new CatParameters(newCatName.Text, newCatRace.Text, Convert.ToInt32(newCatMass.Text), food.Text,catSex);
                 _catsList.Add(newCat);
 
                 catsList.Items.Add(newCat.catName);
