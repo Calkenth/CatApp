@@ -17,7 +17,7 @@ namespace CatApp.Model
         protected string _imageSource { get; set; }
         protected DateTime _birthDate { get; set; }
         protected bool _isMale { get; set; }
-        protected DateTime _creationDate { get; set; }
+        protected DateTime _weightDate { get; set; }
 
         public Cat(string Name,string Race, int Mass,string Food, bool isMale)
         {

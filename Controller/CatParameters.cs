@@ -114,15 +114,15 @@ namespace CatApp.ViewModel
                 return _birthDate.ToShortDateString();
             }
         }
-        public DateTime creationDate
+        public DateTime weightDate
         {
             set
             {
-                _creationDate = DateTime.Now;
+                _weightDate = value;
             }
             get
             {
-                return _creationDate;
+                return _weightDate;
             }
         }
     }

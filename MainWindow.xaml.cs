@@ -36,7 +36,8 @@ namespace CatApp
             InitializeComponent();
             todayDate.Text = todayDateTime.ToShortDateString();
             _catsList.Add(new CatParameters("Fenrir", "Ragdoll", 5, "Barf",true));
-            foreach(var Cat in _catsList)
+            Directory.CreateDirectory(appPath + @"\" + "Fenrir");
+            foreach (var Cat in _catsList)
             {
                 catsList.Items.Add(Cat.catName);
             }
@@ -58,6 +59,7 @@ namespace CatApp
                     catSex = true;
                 }
                 CatParameters newCat = new CatParameters(newCatName.Text, newCatRace.Text, Convert.ToInt32(newCatMass.Text), food.Text,catSex);
+                newCat.weightDate = DateTime.Now;
                 _catsList.Add(newCat);
 
                 catsList.Items.Add(newCat.catName);
@@ -86,11 +88,18 @@ namespace CatApp
 
         private void ShowCat_Click(object sender, RoutedEventArgs e)
         {
-            cat = Convert.ToString(catsList.SelectedItem);
-            CatParameters selectedCat = _catsList.Find(selCat => selCat.catName == cat);
-            var newWPF = new CatDetails(selectedCat);
-            newWPF.CatDetail();
-            newWPF.Show();
+            if (catsList.SelectedItem != null)
+            {
+                string name = catsList.SelectedItem.ToString();
+                CatParameters selectedCat = _catsList.Find(selCat => selCat.catName == name);
+                var newWPF = new CatDetails(selectedCat);
+                newWPF.CatDetail();
+                newWPF.Show();
+            }
+            else
+            {
+                MessageBox.Show("Choose a cat!", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }        
     }
 }
