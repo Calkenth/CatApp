@@ -3,6 +3,8 @@ using CatApp.ViewModel;
 using CatApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +29,8 @@ namespace CatApp
         DateTime todayDateTime = DateTime.Now;
         string cat = string.Empty;
         bool catSex = false;
-        
+        string appPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + @"\Cats";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,13 +40,19 @@ namespace CatApp
             {
                 catsList.Items.Add(Cat.catName);
             }
+            Closing += MainWindow_Closing;
+        }
+        // delete event after creating pernament DB
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Directory.Delete(appPath,true);
         }
 
         private void NewCat_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                var res = MessageBox.Show("Is" + newCatName.Text +"male?", "One more thing", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                var res = MessageBox.Show("Is " + newCatName.Text +" male?", "One more thing", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if(res == MessageBoxResult.Yes)
                 {
                     catSex = true;
@@ -52,6 +61,7 @@ namespace CatApp
                 _catsList.Add(newCat);
 
                 catsList.Items.Add(newCat.catName);
+                Directory.CreateDirectory(appPath + @"\" + newCatName.Text);
             }
             catch(Exception ex)
             {
@@ -81,6 +91,11 @@ namespace CatApp
             var newWPF = new CatDetails(selectedCat);
             newWPF.CatDetail();
             newWPF.Show();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
         }
     }
 }

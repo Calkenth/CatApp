@@ -49,6 +49,9 @@ namespace CatApp.Views
                 File.Copy(filepath, thisCatPath, true);
                 _selectedCat.vetFindings = thisCatPath;
             }
+            Close();
+            PDFReader reader = new PDFReader(_selectedCat.vetFindings, _selectedCat);
+            reader.Show();
         }
     }
 }

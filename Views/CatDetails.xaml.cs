@@ -111,9 +111,18 @@ namespace CatApp.Views
 
             if (_selectedCat.imageSource != null)
             {
-                catPicture.Source = new BitmapImage(new Uri(_selectedCat.imageSource));
+                catPicture.Source = BitmapFromUri(_selectedCat.imageSource);
             }
             return _selectedCat;
+        }
+        public static ImageSource BitmapFromUri(string source)
+        {
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.CacheOption = BitmapCacheOption.OnLoad;
+            bitmap.UriSource = (new Uri(source));
+            bitmap.EndInit();
+            return bitmap;
         }
         private void SaveCat_Click(object sender, RoutedEventArgs e)
         {
@@ -141,16 +150,33 @@ namespace CatApp.Views
               "Portable Network Graphic (*.png)|*.png";
             if (op.ShowDialog() == true)
             {
+                string newPic = string.Empty;
                 string filepath = op.FileName;
                 string fileName = "catMainPic";
                 string thisCatPath = appPath + iName + @"\" + fileName;
-                if(Directory.Exists(appPath + iName) == false)
+                if (Directory.Exists(appPath + iName) == false)
                 {
                     Directory.CreateDirectory(appPath + iName);
                 }
-                File.Copy(filepath, thisCatPath, true);
-                catPicture.Source = new BitmapImage(new Uri(thisCatPath));
-                _selectedCat.imageSource = thisCatPath;
+                if (File.Exists(_selectedCat.imageSource))
+                {
+                    string old = _selectedCat.imageSource;
+                    newPic = thisCatPath;
+                    if(string.Equals(_selectedCat.imageSource,thisCatPath))
+                    {
+                        newPic = _selectedCat.imageSource + "_new";
+                    }
+                    File.Copy(op.FileName, newPic, true);
+                    catPicture.Source = BitmapFromUri(newPic);
+                    _selectedCat.imageSource = newPic;
+                    File.Delete(old);
+                }
+                else
+                {
+                    File.Copy(filepath, thisCatPath, true);
+                    catPicture.Source = BitmapFromUri(thisCatPath);
+                    _selectedCat.imageSource = thisCatPath;
+                }
             }
 
         }
@@ -160,6 +186,7 @@ namespace CatApp.Views
             string iName = _selectedCat.catName;
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a file with findings";
+            if (Directory.Exists(appPath + iName) == false)
             {
                 Directory.CreateDirectory(appPath + iName);
             }
@@ -167,9 +194,8 @@ namespace CatApp.Views
             if (op.ShowDialog() == true)
             {
                 string filepath = op.FileName;
-                string fileName = "catFindings";
+                string fileName = op.SafeFileName;
                 string thisCatPath = appPath + iName + @"\" + fileName;
-                if (Directory.Exists(appPath + iName) == false)
                 File.Copy(filepath, thisCatPath, true);
                 _selectedCat.vetFindings = thisCatPath;
                 PDFReader reader = new PDFReader(thisCatPath,_selectedCat);
