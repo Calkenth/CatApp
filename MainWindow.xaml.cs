@@ -91,11 +91,6 @@ namespace CatApp
             var newWPF = new CatDetails(selectedCat);
             newWPF.CatDetail();
             newWPF.Show();
-        }
-
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-        }
+        }        
     }
 }

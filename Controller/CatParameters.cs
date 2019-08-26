@@ -35,6 +35,10 @@ namespace CatApp.ViewModel
         }
         public int catMass
         {
+            set
+            {
+                _mass = value;
+            }
             get
             {
                 return _mass;
@@ -108,6 +112,17 @@ namespace CatApp.ViewModel
             get
             {
                 return _birthDate.ToShortDateString();
+            }
+        }
+        public DateTime creationDate
+        {
+            set
+            {
+                _creationDate = DateTime.Now;
+            }
+            get
+            {
+                return _creationDate;
             }
         }
     }

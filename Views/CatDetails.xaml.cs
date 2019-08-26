@@ -42,10 +42,19 @@ namespace CatApp.Views
             }
             else
             {
-                catName.Text = _selectedCat.catName;                
-                catMass.Text = Convert.ToString(_selectedCat.catMass) + " kg";
+                catName.Text = _selectedCat.catName;
                 catRace.Text = _selectedCat.catRace;
                 catFood.Text = _selectedCat.catFood.ToUpperInvariant();
+                catMass.Text = Convert.ToString(_selectedCat.catMass) + " kg";
+
+                double massDays = _selectedCat.creationDate.Subtract(DateTime.Now).TotalDays;
+                if (massDays >= 14)
+                {
+                    MessageBox.Show("You should weight your cat!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    string actualMass = Microsoft.VisualBasic.Interaction.InputBox("Put actual cat mass", "Cat mass");
+                    _selectedCat.catMass = Convert.ToInt32(actualMass);
+                    catMass.Text = actualMass + " kg";
+                }
 
                 if(_selectedCat.birthDate == "01.01.0001")
                 {
